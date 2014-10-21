@@ -1,8 +1,10 @@
 package com.devl.development.dockingbox.pdb;
 
 import org.biojava.bio.structure.Structure;
+import org.biojava.bio.structure.align.util.AtomCache;
 import org.biojava.bio.structure.io.FileParsingParameters;
 import org.biojava.bio.structure.io.PDBFileReader;
+import org.biojava3.core.util.InputStreamProvider;
 
 import java.io.IOException;
 
@@ -11,12 +13,13 @@ import java.io.IOException;
  */
 public class PDBReader {
 
+    private static final String PDB_FILE_PATH = "/tmp/";
     private PDBFileReader reader;
 
     public PDBReader() {
         reader = new PDBFileReader();
         // the path to the local PDB installation
-        reader.setPath("/tmp");
+        reader.setPath(PDB_FILE_PATH);
         // are all files in one directory, or are the files split,
         // as on the PDB ftp servers?
         reader.setPdbDirectorySplit(true);
@@ -33,7 +36,7 @@ public class PDBReader {
     }
 
     /**
-     * Returns a structure object by first fetching the PDB File from the repository, parsing it and returnn
+     * Returns a structure object by first fetching the PDB File from the online repository, parsing it and returnn
      * <p/>
      * http://www.biojava.org/docs/api/index.html?org/biojava/bio/structure/io/
      *
@@ -44,10 +47,12 @@ public class PDBReader {
      */
     public synchronized Structure readPDB(String pdbId) throws PDBFileReaderException {
         try {
+
             return reader.getStructureById(pdbId);
         } catch (IOException e) {
             throw new PDBFileReaderException(e);
         }
     }
+
 
 }

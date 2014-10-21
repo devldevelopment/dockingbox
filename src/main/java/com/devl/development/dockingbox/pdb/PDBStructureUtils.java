@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Vector;
 
 /**
- * Created by lapop on 21/10/14.
+ * Created by Dev Lakhani on 21/10/14.
  */
 public class PDBStructureUtils {
 
@@ -47,11 +47,12 @@ public class PDBStructureUtils {
     }
 
     /**
-     * Entry point to locate bounding box for a PDB structure given residue positions and a chain id
+     * Entry point to locate bounding box for a PDB structure given residue positions and a chain id.
+     * The returned value is the width, height, depth of the box and its centre coordinates.
      * @param structure
      * @param chainId
      * @param residues
-     * @return
+     * @return double[] in the form of [maxX - minX, maxY - minY, maxZ - minZ, centreX, centreY, centreZ]
      */
     public static double[] getBoundingBox(Structure structure, String chainId, int[] residues) {
         return getBoundingBox(getAminoAtomsFromChain(getChainFromStructure(structure, chainId), residues));
