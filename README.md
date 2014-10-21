@@ -4,7 +4,7 @@ dockingbox
 A Biojava based utility for selecting docking boxes based on amino acids and atom positions. Used for tools like iDock, Autodock Vina etc.
 
 
-To use the tool, simply instantiate the reader and input the PDBID, Chain and residues around which you want to place the bounding box
+To use the tool, simply instantiate the reader and input the PDBID, Chain and residue (positions) around which you want to place the bounding box
 
 ```
 PDBReader reader = new PDBReader();
