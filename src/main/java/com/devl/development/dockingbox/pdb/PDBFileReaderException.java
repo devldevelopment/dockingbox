@@ -1,6 +1,4 @@
-package com.devl.development.pdb;
-
-import java.io.IOException;
+package com.devl.development.dockingbox.pdb;
 
 /**
  * Created by lapop on 21/10/14.

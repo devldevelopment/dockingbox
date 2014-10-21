@@ -1,8 +1,7 @@
-package com.devl.development.pdb;
+package com.devl.development.dockingbox.pdb;
 
 import org.biojava.bio.structure.*;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
 

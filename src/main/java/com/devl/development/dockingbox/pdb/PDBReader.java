@@ -1,4 +1,4 @@
-package com.devl.development.pdb;
+package com.devl.development.dockingbox.pdb;
 
 import org.biojava.bio.structure.Structure;
 import org.biojava.bio.structure.io.FileParsingParameters;
