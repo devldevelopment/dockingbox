@@ -10,6 +10,7 @@ To use the tool, simply instantiate the reader and input the PDBID, Chain and re
 PDBReader reader = new PDBReader();
 double[] box = PDBStructureUtils.getBoundingBox(reader.readPDB("2RLJ"), "A", new int[]{8, 12});
 ```
+In the example above we are asking for a bounding box for protein 2RLJ with chain A and residues 8 and 12.
 
 The resulting box double array contains:
 
@@ -21,3 +22,5 @@ box[3] is the centre of the box in the x plane
 box[4] is the centre of the box in the y plane
 box[5] is the centre of the box in the z plane
 ```
+
+TODO: Add padding to the box and allow boxes across chains.
