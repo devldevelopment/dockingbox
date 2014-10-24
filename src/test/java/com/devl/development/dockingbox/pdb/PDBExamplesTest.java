@@ -16,6 +16,8 @@ package com.devl.development.dockingbox.pdb;
  */
 import org.junit.Test;
 
+import java.util.Arrays;
+
 import static org.junit.Assert.assertEquals;
 /**
  * Copyright 2014 Dev Lakhani
@@ -36,7 +38,7 @@ import static org.junit.Assert.assertEquals;
 public class PDBExamplesTest {
 
     @Test
-    public void test2RLJ() throws PDBFileReaderException {
+    public void test2RLJ() throws PDBFileReaderException, PDBStructureUtilsException {
         PDBReader reader = new PDBReader();
         double[] box = PDBStructureUtils.getBoundingBox(reader.readPDB("2RLJ"), "A", new int[]{8, 12});
         assertEquals(12.661000000000001, box[0], 10e-4);//xsize
@@ -47,4 +49,15 @@ public class PDBExamplesTest {
         assertEquals(0.1200000000000001, box[5], 10e-4);//zcentre
     }
 
+    @Test
+    public void test2GFO() throws PDBFileReaderException, PDBStructureUtilsException {
+        PDBReader reader = new PDBReader();
+        double[] box = PDBStructureUtils.getBoundingBox(reader.readPDB("2GF0"), "A", new int[]{4, 5, 6, 7, 8});
+        assertEquals(6.625, box[0], 10e-4);
+        assertEquals(12.758, box[1], 10e-4);
+        assertEquals(15.7, box[2], 10e-4);
+        assertEquals(19.5345, box[3], 10e-4);
+        assertEquals(0.1459999999999999, box[4], 10e-4);
+        assertEquals(-5.965, box[5], 10e-4);
+    }
 }

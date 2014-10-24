@@ -42,7 +42,7 @@ public class PDBStructureUtilsTest {
     }
 
     @Test
-    public void extractAtoms() throws PDBFileReaderException {
+    public void extractAtoms() throws PDBFileReaderException, PDBStructureUtilsException {
         Chain chainA = mock(Chain.class);
 
         AminoAcid group1= mock(AminoAcid.class);
@@ -96,7 +96,7 @@ public class PDBStructureUtilsTest {
     }
 
     @Test
-    public void extractBox() throws PDBFileReaderException {
+    public void extractBox() throws PDBFileReaderException, PDBStructureUtilsException {
 
         Chain chainA = mock(Chain.class);
         when(chainA.getChainID()).thenReturn("A");

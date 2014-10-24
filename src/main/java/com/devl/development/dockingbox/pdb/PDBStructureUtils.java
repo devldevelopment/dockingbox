@@ -31,7 +31,7 @@ public class PDBStructureUtils {
     public static Chain getChainFromStructure(Structure structure, String chainId) {
         for (Chain c : structure.getChains()) {
             System.out.println("Chain " + c.getName() + " details:");
-            System.out.println("Atom ligands: " + c.getAtomLigands());
+            System.out.println("Atom ligands: " + c.getAtomSequence());
             if (c.getChainID().equals(chainId)) {
 
                 return c;
@@ -41,19 +41,37 @@ public class PDBStructureUtils {
         return null;
     }
 
-    public static List<Atom> getAminoAtomsFromChain(Chain chain, int[] residuePositions) {
+    public static List<Atom> getAminoAtomsFromChain(Chain chain, int[] residuePositions) throws PDBStructureUtilsException {
         List<Group> groups = chain.getAtomGroups("amino");
         List<Atom> allAtoms = new Vector<Atom>();
         for (Group group : groups) {
-            if (group instanceof AminoAcid) {
-                AminoAcid aa = (AminoAcid) group;
+
+             if (group instanceof AminoAcidImpl) {
+                AminoAcidImpl aa = (AminoAcidImpl) group;
+
                 for (int position : residuePositions) {
                     //only select atoms for the residues we are interesed in
                     if (aa.getResidueNumber().getSeqNum() == position) {
                         allAtoms.addAll(aa.getAtoms());
+                        System.out.println("Selecting Amino Acid "+ aa.getAminoType() +" in chain"+ chain.getChainID());
                     }
                 }
             }
+            else if (group instanceof AminoAcid) {
+                AminoAcid aa = (AminoAcid) group;
+
+                for (int position : residuePositions) {
+                    //only select atoms for the residues we are interesed in
+                    if (aa.getResidueNumber().getSeqNum() == position) {
+                        allAtoms.addAll(aa.getAtoms());
+                        System.out.println("Selecting Amino Acid "+ aa.getPDBName() +" in chain"+ chain.getChainID());
+                    }
+                }
+            }
+        }
+        if(allAtoms.isEmpty())
+        {
+            throw new PDBStructureUtilsException("No matching atoms found ");
         }
         return allAtoms;
     }
@@ -66,7 +84,7 @@ public class PDBStructureUtils {
      * @param residues
      * @return double[] in the form of [maxX - minX, maxY - minY, maxZ - minZ, centreX, centreY, centreZ]
      */
-    public static double[] getBoundingBox(Structure structure, String chainId, int[] residues) {
+    public static double[] getBoundingBox(Structure structure, String chainId, int[] residues) throws PDBStructureUtilsException {
         return getBoundingBox(getAminoAtomsFromChain(getChainFromStructure(structure, chainId), residues));
     }
 
@@ -109,7 +127,10 @@ public class PDBStructureUtils {
         double centreX = ((maxX - minX) / 2.0) + minX;
         double centreY = ((maxY - minY) / 2.0) + minY;
         double centreZ = ((maxZ - minZ) / 2.0) + minZ;
-        return new double[]{maxX - minX, maxY - minY, maxZ - minZ, centreX, centreY, centreZ};
+        double width=maxX-minX;
+        double height=maxY-minY;
+        double depth=maxZ-minZ;
+        return new double[]{width,height,depth, centreX, centreY, centreZ};
 
     }
 }
