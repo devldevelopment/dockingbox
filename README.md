@@ -24,7 +24,7 @@ box[5] is the centre of the box in the z plane
 ```
 
 Which looks like:
-
+![alt text][logo]
 [logo]: https://github.com/devldevelopment/dockingbox/blob/master/src/test/resources/2GF0.png "2GFO Bounding Box"
 
 TODO: Add padding to the box and allow boxes across chains.
