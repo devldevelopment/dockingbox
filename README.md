@@ -9,6 +9,12 @@ To use the tool, simply instantiate the reader and input the PDBID, Chain and re
 ```
 PDBReader reader = new PDBReader();
 double[] box = PDBStructureUtils.getBoundingBox(reader.readPDB("2GF0"), "A", new int[]{4, 5, 6, 7, 8});
+
+or 
+
+double[] box = PDBStructureUtils.getBoundingBoxWithPadding(reader.readPDB("2GF0"), "A", new int[]{4, 5, 6, 7, 8},10.0);
+
+which adds 10A of padding to the surrounding box for ligand translation and rotation
 ```
 In the example above we are asking for a bounding box for protein 2GF0 with chain A and residues 4 through to 8.
 
@@ -23,8 +29,13 @@ box[4] is the centre of the box in the y plane
 box[5] is the centre of the box in the z plane
 ```
 
-Which looks like:
+Which looks like (without padding):
 ![alt text][logo]
 [logo]: https://github.com/devldevelopment/dockingbox/blob/master/src/test/resources/2GF0.png "2GFO Bounding Box"
 
-TODO: Add padding to the box and allow boxes across chains.
+
+Which looks like (with padding):
+![alt text][logo]
+[logo]: https://github.com/devldevelopment/dockingbox/blob/master/src/test/resources/2GF0Padding.png "2GFO Bounding Box with 10A padding"
+
+TODO: Allow boxes from residues across chains.
