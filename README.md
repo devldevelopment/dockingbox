@@ -30,8 +30,8 @@ box[5] is the centre of the box in the z plane
 ```
 
 Which looks like (without padding):
-![alt text][logo]
-[logo]: https://github.com/devldevelopment/dockingbox/blob/master/src/test/resources/2GF0.png "2GFO Bounding Box"
+![alt text][logo1]
+[logo1]: https://github.com/devldevelopment/dockingbox/blob/master/src/test/resources/2GF0.png "2GFO Bounding Box"
 
 
 Which looks like (with padding):
