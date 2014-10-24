@@ -60,4 +60,16 @@ public class PDBExamplesTest {
         assertEquals(0.1459999999999999, box[4], 10e-4);
         assertEquals(-5.965, box[5], 10e-4);
     }
+
+    @Test
+    public void test2GFOWithPadding() throws PDBFileReaderException, PDBStructureUtilsException {
+        PDBReader reader = new PDBReader();
+        double[] box = PDBStructureUtils.getBoundingBoxWithPadding(reader.readPDB("2GF0"), "A", new int[]{4, 5, 6, 7, 8},10.0);
+        assertEquals(26.625, box[0], 10e-4);
+        assertEquals(32.758, box[1], 10e-4);
+        assertEquals(35.7, box[2], 10e-4);
+        assertEquals(19.5345, box[3], 10e-4);
+        assertEquals(0.1459999999999999, box[4], 10e-4);
+        assertEquals(-5.965, box[5], 10e-4);
+    }
 }
